@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
-from app import app, db
+from app import app, db, posts_mock
 from .forms import LoginForm, RegistrationForm, EditProfileForm
 from .models import User
 
@@ -19,24 +19,7 @@ def before_request():
 @login_required
 def index():
     title = 'Main Page'
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Texas!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        },
-        {
-            'author': {'username': 'Nick'},
-            'body': 'Your fish is ugly!'
-        },
-        {
-            'author': {'username': 'Harry'},
-            'body': 'I am the best developer!'
-        }
-    ]
+    posts = posts_mock
     return render_template('index.html', title=title, posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])

@@ -8,6 +8,26 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 
 
+posts_mock = [
+    {
+        'author': {'username': 'John'},
+        'body': 'Beautiful day in Texas!'
+    },
+    {
+        'author': {'username': 'Susan'},
+        'body': 'The Avengers movie was so cool!'
+    },
+    {
+        'author': {'username': 'Nick'},
+        'body': 'Your fish is ugly!'
+    },
+    {
+        'author': {'username': 'Harry'},
+        'body': 'I am the best developer!'
+    }
+]
+
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
