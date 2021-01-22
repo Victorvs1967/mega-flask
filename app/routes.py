@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, url_for, flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
-from app import app, db, posts_mock
+from app import app, db
 from .forms import LoginForm, RegistrationForm, EditProfileForm, PostForm
 from .models import User, Post
 
@@ -26,7 +26,7 @@ def index():
         db.session.commit()
         flash('Your post is now live!')
         return redirect(url_for('index'))
-    posts = posts_mock
+    posts = current_user.followed_posts().all()
     return render_template('index.html', title=title, posts=posts, form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -71,10 +71,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    posts = current_user.followed_posts().all()
     return render_template('user.html', user=user, posts=posts)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
