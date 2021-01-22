@@ -1,5 +1,4 @@
-2021-01-22 00:08:45,621 INFO: My Blog startup [in /Users/victors/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/habr/mega-flask/app/__init__.py:46]
-2021-01-22 00:09:52,759 ERROR: Exception on /edit_profile [POST] [in /Users/victors/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/habr/mega-flask/venv/lib/python3.9/site-packages/flask/app.py:1891]
+2021-01-22 09:52:59,015 ERROR: Exception on /edit_profile [POST] [in /Users/victors/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/habr/mega-flask/venv/lib/python3.9/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Users/victors/Library/Mobile Documents/com~apple~CloudDocs/Documents/Developer/habr/mega-flask/venv/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
     self.dialect.do_execute(
