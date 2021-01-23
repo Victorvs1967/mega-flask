@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<table>
-    <tr valign="top">
+{% block app_content %}
+<table class="table">
+    <tr>
         <td><img src="{{ user.avatar(128) }}" alt="avatar"></td>
         <td>
             <h1>User: {{ user.username }}</h1>
@@ -19,10 +19,11 @@
         </td>
     </tr>
 </table>
-<hr>
+<table class="table">
 {% for post in posts %}
 {% include '_post.html' %}
 {% endfor %}
+</table>
 {% if prev_url %}
 <a href="{{ prev_url }}">Newer posts</a>
 {% endif %}

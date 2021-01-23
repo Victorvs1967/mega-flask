@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block app_content %}
 <h1>Profile</h1>
 <form action="" method="POST">
     {{ form.hidden_tag() }}
@@ -13,7 +13,7 @@
     </p>
     <p>
         {{ form.about_me.label }}<br>
-        {{ form.about_me(cols=50, rows=6) }}<br>
+        {{ form.about_me(cols=64, rows=6) }}<br>
         {% for error in form.about_me.errors %}
         <span style="color: red;">[{{ error }}]</span>                
         {% endfor %}
