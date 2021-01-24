@@ -5,6 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
 
+    LANGUAGES = ['en', 'ru']
     BOOTSTRAP_BOOTSWATCH_THEME = 'Superhero'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'MyVerySecretKeyForApplication'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{os.path.join(basedir, "app.db")}'

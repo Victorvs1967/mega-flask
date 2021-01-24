@@ -1,5 +1,6 @@
 from app import app, db, moment
 from app.models import User, Post, Category
+from app import cli
 
 
 @app.shell_context_processor
