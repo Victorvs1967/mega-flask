@@ -1,8 +1,9 @@
 import os
+from dotenv import load_dotenv
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
+load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
 
     LANGUAGES = ['en', 'ru']
@@ -18,4 +19,4 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['victorsmirnov67@gmail.com']
     
-    POSTS_PER_PAGE = 25
+    POSTS_PER_PAGE = 10
