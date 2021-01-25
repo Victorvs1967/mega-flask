@@ -2,12 +2,12 @@
 {% from "bootstrap/form.html" import render_form %}
 
 {% block app_content %}
-<h1>Sign In</h1>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6 mx-auto">
+        <h1>Sign In</h1>
         {{ render_form(form) }}
+        <p>New User? <a href="{{ url_for('auth.register') }}">Click to register.</a></p>
+        <p>Fogot Your Password? <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a></p>
     </div>
 </div>
-<p>New User? <a href="{{ url_for('auth.register') }}">Click to register.</a></p>
-<p>Fogot Your Password? <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a></p>
 {% endblock %}
