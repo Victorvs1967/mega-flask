@@ -21,3 +21,5 @@ class Config(object):
     ADMINS = ['victorsmirnov67@gmail.com']
     
     POSTS_PER_PAGE = 10
+
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
