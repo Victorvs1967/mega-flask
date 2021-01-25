@@ -7,6 +7,7 @@ load_dotenv(os.path.join(basedir, '.env'))
 class Config(object):
 
     LANGUAGES = ['en', 'ru']
+    FLASK_ADMIN_SWATCH = 'Superhero'
     BOOTSTRAP_BOOTSWATCH_THEME = 'Superhero'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'MyVerySecretKeyForApplication'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{os.path.join(basedir, "app.db")}'
