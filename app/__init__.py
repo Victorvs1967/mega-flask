@@ -1,4 +1,5 @@
 import os
+import psycopg2
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask, request, current_app
