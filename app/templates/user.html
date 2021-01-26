@@ -3,7 +3,7 @@
 {% block app_content %}
 <table class="table">
     <tr>
-        <td><img src="{{ user.avatar(128) }}" alt="avatar"></td>
+        <td width="64px"><img src="{{ user.avatar(128) }}" alt="avatar"></td>
         <td>
             <h1>User: {{ user.username }}</h1>
             {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}

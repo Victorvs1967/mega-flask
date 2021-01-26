@@ -2,7 +2,7 @@ import os
 import psycopg2
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import Flask, request, current_app
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
@@ -24,9 +24,7 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 babel = Babel()
-admin = Admin()
-admin.name = 'My Blog Admin:'
-admin.template_mode = 'bootstrap4'
+admin = Admin(name='My Blog Admin:', template_mode='bootstrap4')
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -40,7 +38,7 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app)
     admin.init_app(app)
-    
+
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
 
@@ -49,6 +47,10 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+    @babel.localeselector
+    def get_locale():
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
@@ -85,9 +87,5 @@ def create_app(config_class=Config):
             app.logger.info('My Blog startup')
 
     return app
-
-@babel.localeselector
-def get_locale():
-    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 from app import models

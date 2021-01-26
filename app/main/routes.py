@@ -3,20 +3,11 @@ from flask import render_template, request, redirect, url_for, flash, g, current
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_babel import get_locale, _
 from werkzeug.urls import url_parse
-from flask_admin.contrib.sqla import ModelView
 
-from app import db, admin
+from app import db
 from app.main import bp
 from app.main.forms import EditProfileForm, PostForm
 from app.models import User, Post, Category
-
-
-class UserView(ModelView):   
-    column_exclude_list = ['password_hash', ]
-
-admin.add_view(UserView(User, db.session))
-admin.add_view(ModelView(Post, db.session))
-admin.add_view(ModelView(Category, db.session))
 
 
 @bp.before_request
