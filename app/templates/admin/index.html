@@ -1,4 +1,9 @@
+{% if current_user.username == 'admin' %}
 {% extends 'admin/master.html' %}
+{% else %}
+{% extends 'base.html' %}
+{% endif %}
+
 
 {% block body %}
 {{ super() }}
