@@ -20,7 +20,7 @@
     <a class="nav-link text-reset" href="{{ url_for('main.explore') }}">Explore</a>
     <span class="mr-1">Hello, </span><a class="text-reset" href="{{ url_for('main.user', username=current_user.username) }}">{{ current_user.username }}</a>
     <div class="d-flex ml-auto">
-        <a class="nav-link text-reset" href="{{ url_for('admin.index') }}">Admin</a>
+        {% if current_user.username == "admin" %}<a class="nav-link text-reset" href="{{ url_for('admin.index') }}">Admin</a>{% endif %}
         <a class="nav-link text-reset" href="{{ url_for('auth.logout') }}"> Logout</a>        
     </div>
     {% endif %}
