@@ -1,9 +1,18 @@
+{% set user_link %}
+<span class="user-popup">
+    <a class="text-decoration-none" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }} </a>
+</span>
+{% endset %}
+
 <tr>
     <td width="70px">
-        <a href="{{ url_for('main.user', username=post.author.username) }}"><img src="{{ post.author.avatar(48) }}" alt="avatar"></a>
+        <span class="user-popup">
+            <a href="{{ url_for('main.user', username=post.author.username) }}"><img src="{{ post.author.avatar(48) }}" alt="avatar"></a>
+        </span>
     </td>
     <td>
-        <a class="text-decoration-none" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }} </a>
+        {{ user_link }}
         said {{ moment(post.timestamp).fromNow() }}:<br>
-        <strong>{{ post.body }}</strong></td>
+        <strong>{{ post.body }}</strong>
+    </td>
 </tr>

@@ -14,11 +14,13 @@ def load_user(id):
     return User.query.get(int(id))
 
 followers = db.Table('followers',
-    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
-    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+    db.Column('follower_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('users.id'))
 )
 
 class User(UserMixin, db.Model):
+    __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), index=True, unique=True)
     email = db.Column(db.String(255), index=True, unique=True)
@@ -74,6 +76,8 @@ class User(UserMixin, db.Model):
             return
         return User.query.get(id)
 class Category(db.Model):
+    __tablename__ = 'categories'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), index=True, unique=True)
     posts = db.relationship('Post', backref='category', lazy='dynamic')
@@ -82,11 +86,13 @@ class Category(db.Model):
         return f'<Category {self.name}>'
 
 class Post(db.Model):
+    __tablename__ = 'posts'
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     def __repr__(self):
         return f'<Post {self.body}>'
