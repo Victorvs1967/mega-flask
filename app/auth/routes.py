@@ -9,7 +9,7 @@ from app import db, admin
 from app.models import User, Post, Category
 from app.auth import bp
 from app.auth.email import send_reset_password_email
-from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordRwquestForm, ResetPasswordForm
+from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 
 
 class UserView(ModelView):   
@@ -63,7 +63,7 @@ def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     title = 'Reset Password'
-    form = ResetPasswordRwquestForm()
+    form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
