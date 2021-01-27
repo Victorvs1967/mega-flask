@@ -2,9 +2,11 @@
 
 {% block app_content %}
 <h1>{{ _('Messages') }}</h1>
-{% for post in messages %}
-{% include "_post.html" %}
-{% endfor %}
+<table class="table">
+    {% for post in messages %}
+    {% include "_post.html" %}
+    {% endfor %}
+</table>
 <nav aria-label="...">
     <ul class="pagination">
         <li class="page-item{% if not prev_url %} disabled {% endif %}">

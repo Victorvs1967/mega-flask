@@ -6,7 +6,7 @@ from werkzeug.urls import url_parse
 from flask_admin.contrib.sqla import ModelView
 
 from app import db, admin
-from app.models import User, Post, Category
+from app.models import User, Post, Category, Message, Notification
 from app.auth import bp
 from app.auth.email import send_reset_password_email
 from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
@@ -18,6 +18,8 @@ class UserView(ModelView):
 admin.add_view(UserView(User, db.session))
 admin.add_view(ModelView(Post, db.session))
 admin.add_view(ModelView(Category, db.session))
+admin.add_view(ModelView(Message, db.session))
+admin.add_view(ModelView(Notification, db.session))
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
