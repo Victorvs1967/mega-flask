@@ -24,3 +24,6 @@ class Config(object):
     POSTS_PER_PAGE = 10
 
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
+    

@@ -1,6 +1,8 @@
 import os
 import psycopg2
 import logging
+import rq
+from redis import Redis
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
@@ -29,6 +31,9 @@ admin = Admin(name='My Blog Admin:', template_mode='bootstrap4')
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('myblog-tasks', connection=app.redis)
 
     db.init_app(app)
     migrate.init_app(app, db)
