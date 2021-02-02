@@ -1,0 +1,7 @@
+Dear, {{ user.username }},
+
+Please find attached the archive od your posts thet you requested.
+
+Sincerely,
+
+My Blog.
