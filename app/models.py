@@ -106,7 +106,7 @@ class User(UserMixin, db.Model):
         db.session.add(task)
         return task
 
-    def get_task_in_progress(self):
+    def get_tasks_in_progress(self):
         return Task.query.filter_by(user=self, complete=False).all()
 
     def get_task_in_progress(self, name):
@@ -174,6 +174,6 @@ class Task(db.Model):
             return None
         return rq_job
 
-    def get_process(self):
+    def get_progress(self):
         job = self.get_rq_job()
-        return job.meta.get('process', 0) if job is not None else 100
+        return job.meta.get('progress', 0) if job is not None else 100
