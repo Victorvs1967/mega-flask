@@ -53,6 +53,9 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
+
     @babel.localeselector
     def get_locale():
         return request.accept_languages.best_match(app.config['LANGUAGES'])

@@ -5,7 +5,7 @@ import rq
 from time import time
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import current_app
+from flask import current_app, url_for
 from flask_login import UserMixin
 from hashlib import md5
 
@@ -50,6 +50,34 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
+
+    def to_dict(self, include_email=False):
+        data = {
+            'id': self.id,
+            'username': self.username,
+            'last_seen': self.last_seen.isoformat() + 'Z',
+            'about_me': self.about_me,
+            'post_count': self.posts.count(),
+            'follower_count': self.followers.count(),
+            'followed_count': self.followed.count(),
+            '_links': {
+                'self': url_for('api.get_user', id=self.id),
+                'followers': url_for('api.get_followers', id=self.id),
+                'folloed': url_for('api.followed', id=self.id),
+                'avatar': self.avatar(128)
+            }
+        }
+        if include_email:
+            data['email'] = self.email
+        return data
+
+    def from_dict(self, data, new_user=False):
+        fields = ['username', 'email', 'about_me']
+        for field in fields:
+            if field in data:
+                setattr(self, field, data[field])
+            if new_user and 'password' in data:
+                self.set_password(data['password'])
 
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
