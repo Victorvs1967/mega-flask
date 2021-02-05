@@ -3,14 +3,17 @@ from flask import jsonify, request, url_for
 from app import db
 from app.models import User
 from app.api import bp
+from app.api.auth import token_auth
 from app.api.errors import bed_request
 
 
 @bp.route('/users/<int:id>', methods=['GET'])
+@token_auth.login_required
 def get_user(id):
     return jsonify(User.query.get_or_404(id).to_dict())
 
 @bp.route('/users', methods=['GET'])
+@token_auth.login_required
 def get_users():
     page = request.args.get('page', 1, type=int)
     per_page = min(request.args.get('per_page', 10, type=int), 100)
@@ -18,6 +21,7 @@ def get_users():
     return jsonify(data)
 
 @bp.route('/users/<int:id>/followers', methods=['GET'])
+@token_auth.login_required
 def get_followers(id):
     user = User.query.get_or_404(id)
     page = request.args.get('page', 1, type=int)
@@ -26,6 +30,7 @@ def get_followers(id):
     return jsonify(data)
 
 @bp.route('users/<int:id>/followed', methods=['GET'])
+@token_auth.login_required
 def get_followed(id):
     user = User.query.get_or_404(id)
     page = request.args.get('page', 1, type=int)
@@ -52,6 +57,7 @@ def create_user():
     return response
 
 @bp.route('/users/<int:id>', methods=['PUT'])
+@token_auth.login_required
 def update_user(id):
     user = User.query.get_or_404(id)
     data = request.get_json() or {}
