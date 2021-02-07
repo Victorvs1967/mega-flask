@@ -11,7 +11,7 @@ class Config(object):
     BOOTSTRAP_SERVE_LOCAL = True
     BOOTSTRAP_BOOTSWATCH_THEME = 'superhero'
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'MyVerySecretKeyForApplication'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{os.path.join(basedir, "app.db")}'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgres://victors:victor77@localhost/mega_flask_blog' #f'sqlite:///{os.path.join(basedir, "app.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
