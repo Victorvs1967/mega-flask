@@ -3,24 +3,25 @@ from flask import render_template, request, redirect, url_for, flash, g
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_babel import get_locale
 from werkzeug.urls import url_parse
-from flask_admin.contrib.sqla import ModelView
+# from flask_admin.contrib.sqla import ModelView
 
-from app import db, admin
+from app import db
+# from app import db, admin
 from app.models import User, Post, Category, Message, Notification, Task
 from app.auth import bp
 from app.auth.email import send_reset_password_email
 from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 
 
-class UserView(ModelView):   
-    column_exclude_list = ['password_hash', ]
+# class UserView(ModelView):   
+#     column_exclude_list = ['password_hash', ]
 
-admin.add_view(UserView(User, db.session))
-admin.add_view(ModelView(Post, db.session))
-admin.add_view(ModelView(Category, db.session))
-admin.add_view(ModelView(Message, db.session))
-admin.add_view(ModelView(Notification, db.session))
-admin.add_view(ModelView(Task, db.session))
+# admin.add_view(UserView(User, db.session))
+# admin.add_view(ModelView(Post, db.session))
+# admin.add_view(ModelView(Category, db.session))
+# admin.add_view(ModelView(Message, db.session))
+# admin.add_view(ModelView(Notification, db.session))
+# admin.add_view(ModelView(Task, db.session))
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
