@@ -13,6 +13,6 @@
     <td>
         {{ user_link }}
         said {{ moment(post.timestamp).fromNow() }}:<br>
-        <strong>{{ post.body }}</strong>
+        <span class="d-inline-block text-truncate" style="max-width: 250px;"><strong>{{ post.body }}</strong></span>
     </td>
 </tr>
